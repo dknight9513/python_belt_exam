@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{painting.name}}</title>
+</head>
+<body>
+    <div class="topBar">
+        <h1>Welcome {{session['first_name']}}!</h1>
+        <div class="topRight">
+            <a href="/paintings/new">Add a New Painting</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+    <h1>{{painting.name}}</h1>
+    <p>Painted by {{painting.painter.first_name}} {{painting.painter.last_name}}</p>
+    <p>Description: {{painting.description}}</p>
+    <p>Price: {{painting.price}}</p>
+    <p>Number Purchased: {{painting.quantity_purchased}}</p>
+    <br><br>
+    {% if painting.quantity_purchased < painting.quantity: %}
+        <a href="/buy_painting/{{painting.id}}"><button>Purchase</button></a>
+    {% else: %}
+        <p>Sold Out :(</p>
+    {% endif %}
+
+</body>
+</html>

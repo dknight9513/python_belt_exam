@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='style-dashboard.css')}}">
+</head>
+<body>
+    <div class="topBar">
+        <h1>Welcome {{session['first_name']}}!</h1>
+        <div class="topRight">
+            <a href="/paintings/new">Add New painting</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+    <p>These are all of the paintings on the site so far. Feel free to browse or add more!</p>
+    <br><br>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{message}}</p>
+            {%endfor%}
+        {% endif %}
+    {% endwith %}
+    <br><br>
+    <div class="wrapper">
+        <div class="left">
+            <p>Postings</p>
+            <div class="box">
+                {% for painting in paintings %}
+                        <p><a href="/paintings/{{painting.id}}">{{painting.title}}</a> by {{painting.painter.first_name}} {{painting.painter.last_name}} 
+                        {% if painting.user_id == session['user_id'] %}
+                            <a href="/paintings/{{painting.id}}/edit">edit</a> | 
+                            <a href="/delete/{{painting.id}}">delete</a>
+                        {% endif %}
+                        </p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="right">
+            <p>Your Purchased Paintings</p>
+            <div class="box">
+                {% for painting in purchased %}
+                        <p><a href="/paintings/{{painting.id}}">{{painting.title}}</a> by {{painting.painter.first_name}} {{painting.painter.last_name}}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

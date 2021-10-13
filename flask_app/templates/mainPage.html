@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register/Login</title>
+    <!-- <link rel="stylesheet" href="../static/style-mainPage.css"> -->
+    <link rel="stylesheet" href="{{url_for('static',filename='style-mainPage.css')}}">
+</head>
+<body>
+    <div class="register">
+        <h2>Register</h2>
+        {% with registration_messages = get_flashed_messages(category_filter=["registration"]) %}
+            {% if registration_messages %}
+                {% for message in registration_messages %}
+                    <p>{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form action="/register" method = 'POST'>
+            <label for="first_name">First Name:</label>
+            <input type="text" name="first_name" id="first_name">
+            <label for="last_name">Last Name:</label>
+            <input type="text" name="last_name" id="last_name">
+            <label for="email">Email:</label>
+            <input type="text" name="email" id="email">
+            <label for="password">Password:</label>
+            <input type="text" name="password" id="password">
+            <label for="confirm_password">Confirm Password:</label>
+            <input type="text" name="confirm_password" id="confirm_password">
+            <input type="submit" value="Register">
+        </form>
+    </div>
+    <div class="login">
+        <h2>Login</h2>
+        {% with login_messages = get_flashed_messages(category_filter=["login"]) %}
+            {% if login_messages %}
+                {% for message in login_messages %}
+                    <p>{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form action="/login" method = 'POST'>
+            <label for="email">Email:</label>
+            <input type="text" name="email" id="email">
+            <label for="password">Password:</label>
+            <input type="text" name="password" id="password">
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</body>
+</html>

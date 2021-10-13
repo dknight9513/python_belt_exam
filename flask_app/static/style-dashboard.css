@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 60%;
+    margin: auto;
+}
+
+.topBar {
+    display: flex;
+    justify-content: space-between;
+    width: 85%;
+    margin: auto;
+}
+
+.topRight {
+    display: flex;
+    justify-content: space-between;
+    width: 25%;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    
+}
